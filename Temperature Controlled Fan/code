@@ -1,0 +1,27 @@
+int lm35Pin = A0;
+int motorPin = 9;
+float tempC;
+
+void setup() {
+  pinMode(motorPin, OUTPUT);
+  Serial.begin(9600);
+}
+
+void loop() {
+  int sensorValue = analogRead(lm35Pin);
+  tempC = (sensorValue * 5.0 * 100.0) / 1023.0; // Convert analog reading to °C
+
+  Serial.print("Temperature: ");
+  Serial.print(tempC);
+  Serial.println(" *C");
+
+  if (tempC > 30) {              // Above 30°C → full speed
+    analogWrite(motorPin, 255);
+  } else if (tempC > 25) {       // Between 25°C and 30°C → medium speed
+    analogWrite(motorPin, 150);
+  } else {                       // Below 25°C → fan OFF
+    analogWrite(motorPin, 0);
+  }
+
+  delay(1000);
+}
