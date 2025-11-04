@@ -1,0 +1,17 @@
+// LM35 Temperature Sensor Readings on Serial Monitor
+
+void setup() {
+  Serial.begin(9600);  // Start serial communication
+}
+
+void loop() {
+  int sensorValue = analogRead(A0);  // Read analog voltage from LM35
+  float voltage = sensorValue * (5.0 / 1023.0); // Convert to voltage
+  float temperatureC = voltage * 100; // LM35 gives 10mV per °C
+
+  Serial.print("Temperature: ");
+  Serial.print(temperatureC);
+  Serial.println(" °C");
+
+  delay(1000);  // Update every second
+}
