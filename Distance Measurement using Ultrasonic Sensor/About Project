@@ -1,0 +1,30 @@
+🔹 Project Name: Distance Measurement using Ultrasonic Sensor (HC-SR04)
+🧠 Description:
+
+This project measures the distance between an object and the sensor using an HC-SR04 ultrasonic sensor and displays the measured distance on the Serial Monitor. The Arduino sends a trigger pulse to the sensor, which emits an ultrasonic wave; the time taken for the echo to return is used to calculate the distance. This project demonstrates the concept of ultrasonic sensing, timing, and real-world measurement using Arduino.
+
+⚙️ Components and Their Purpose
+Component	Description / Purpose
+Arduino UNO	Acts as the main controller. It sends trigger pulses to the sensor, receives the echo signal, calculates time and converts it into distance.
+Ultrasonic Sensor (HC-SR04)	Sends and receives ultrasonic waves to measure the distance to an object using the time-of-flight principle.
+Jumper Wires	Used to connect the sensor pins to the Arduino.
+Breadboard	Helps organize and hold the circuit connections.
+USB Cable	Powers the Arduino and enables serial communication for distance display.
+🔍 Working Principle:
+
+The Arduino sends a short HIGH pulse (10 µs) to the Trigger pin of the HC-SR04.
+
+The sensor emits ultrasonic sound waves (at 40 kHz).
+
+When these waves hit an object, they bounce back and are received by the Echo pin.
+
+The Arduino measures the time taken for the echo to return.
+
+Using the formula
+
+Distance (cm)=Time(µs)×0.0343/2
+
+	​
+
+
+it calculates the distance and displays it on the Serial Monitor.
