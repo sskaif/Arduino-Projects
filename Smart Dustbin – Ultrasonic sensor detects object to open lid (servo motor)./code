@@ -1,0 +1,41 @@
+#include <Servo.h>
+
+Servo lidServo;
+int trigPin = 9;
+int echoPin = 10;
+int servoPin = 3;
+
+void setup() {
+  Serial.begin(9600);
+  pinMode(trigPin, OUTPUT);
+  pinMode(echoPin, INPUT);
+  lidServo.attach(servoPin);
+  lidServo.write(0); // Lid closed
+}
+
+void loop() {
+  long duration, distance;
+
+  // Send a 10us pulse to trigger the ultrasonic sensor
+  digitalWrite(trigPin, LOW);
+  delayMicroseconds(2);
+  digitalWrite(trigPin, HIGH);
+  delayMicroseconds(10);
+  digitalWrite(trigPin, LOW);
+
+  // Read echo
+  duration = pulseIn(echoPin, HIGH);
+  distance = duration * 0.034 / 2; // Convert to cm
+
+  Serial.print("Distance: ");
+  Serial.println(distance);
+
+  // If object is closer than 15 cm, open lid
+  if (distance < 15) {
+    lidServo.write(90); // Open lid
+    delay(3000);        // Keep open for 3 sec
+    lidServo.write(0);  // Close lid
+  }
+
+  delay(500);
+}
