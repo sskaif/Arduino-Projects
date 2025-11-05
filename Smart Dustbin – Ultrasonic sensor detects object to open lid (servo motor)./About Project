@@ -1,0 +1,51 @@
+🗑️ Smart Dustbin using Arduino
+📘 Project Overview
+
+The Smart Dustbin is an IoT-based embedded system project that uses an ultrasonic sensor and a servo motor to automatically open the dustbin lid when an object (like a hand) is detected nearby.
+This helps promote touchless waste disposal, improving hygiene and convenience in daily life.
+
+⚙️ Components Used
+Component	Function
+Arduino Uno	Acts as the main controller to process sensor data and control the servo motor.
+Ultrasonic Sensor (HC-SR04)	Measures the distance between the dustbin and any approaching object.
+Servo Motor (SG90)	Opens and closes the dustbin lid based on sensor readings.
+Jumper Wires & Breadboard	Used for electrical connections between components.
+Power Supply (5V)	Provides power to the Arduino and connected components.
+🧠 Working Principle
+
+The Ultrasonic Sensor continuously measures the distance to detect nearby objects using sound waves.
+
+When the sensor detects an object within 15 cm, it sends this data to the Arduino Uno.
+
+The Arduino processes the data and sends a signal to the Servo Motor.
+
+The Servo Motor rotates by 90°, opening the lid automatically.
+
+After a few seconds (around 3 seconds), the servo returns to its original position, closing the lid.
+
+The Serial Monitor displays the measured distance in real-time for debugging and monitoring.
+
+💡 Key Features
+
+Automatic operation – opens lid when user approaches.
+
+Touchless and hygienic – ideal for public and home use.
+
+Low-cost and easy to build – uses basic Arduino components.
+
+Expandable – can be upgraded with sensors like IR or IoT connectivity (e.g., full-bin alert).
+
+🧩 Applications
+
+Smart waste management systems
+
+Public places (malls, offices, hospitals)
+
+Home automation and hygiene projects
+
+Demonstration of embedded system automation
+
+📊 Conclusion
+
+This project demonstrates the integration of sensors, actuators, and microcontroller programming using Arduino.
+It is an excellent beginner-level embedded systems project that shows how sensors and actuators work together to build a real-world automated solution.
