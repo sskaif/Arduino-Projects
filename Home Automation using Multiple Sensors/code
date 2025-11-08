@@ -1,0 +1,53 @@
+int ldrPin = A0;
+int pirPin = 8;
+int tempPin = A1;
+int sleepSwitch = 7;  // New: Sleep Mode button
+int ledPin = 12;
+int motorPin = 9;
+
+int ldrValue, pirValue, tempValue, sleepState;
+float temperature;
+
+void setup() {
+  Serial.begin(9600);
+  pinMode(ledPin, OUTPUT);
+  pinMode(motorPin, OUTPUT);
+  pinMode(pirPin, INPUT);
+  pinMode(sleepSwitch, INPUT_PULLUP); // HIGH = Normal, LOW = Sleep Mode
+  Serial.println("Smart Home Automation Started");
+}
+
+void loop() {
+  ldrValue = analogRead(ldrPin);
+  pirValue = digitalRead(pirPin);
+  tempValue = analogRead(tempPin);
+  sleepState = digitalRead(sleepSwitch);
+  temperature = (tempValue * 5.0 * 100.0) / 1024.0;
+
+  Serial.print("LDR: "); Serial.print(ldrValue);
+  Serial.print("\t PIR: "); Serial.print(pirValue);
+  Serial.print("\t Temp: "); Serial.print(temperature);
+  Serial.print("\t SleepMode: "); Serial.println(sleepState == LOW ? "ON" : "OFF");
+
+  // Light Control (only if not in sleep mode)
+  if (sleepState == HIGH) {  // Normal Mode
+    if (ldrValue < 400 && pirValue == HIGH) {
+      digitalWrite(ledPin, HIGH); // Turn ON light
+    } else {
+      digitalWrite(ledPin, LOW); // Turn OFF light
+    }
+  } else {
+    digitalWrite(ledPin, LOW); // Sleep Mode - Light stays OFF
+  }
+
+  // Fan Control (works anytime)
+  if (temperature > 30) {
+    analogWrite(motorPin, 255);
+  } else if (temperature > 25) {
+    analogWrite(motorPin, 150);
+  } else {
+    analogWrite(motorPin, 0);
+  }
+
+  delay(1000);
+}
